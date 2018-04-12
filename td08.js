@@ -33,6 +33,36 @@ suivantes d'UsersBDD (à ajouter) :
 
 const rawData = require('./bdd.js')
 
+function parseCSV(string) {
+    var lines
+    var attributes
+    var data
+    var object
+    var i 
+    var parsed
+
+    lines = string.split('\n')
+    
+    parsed = []
+
+    for(var data of lines.slice(1, lines.length)) {
+        object = {}
+
+        data = data.split(',')
+
+        object.id = parseInt(data[0])
+        object.firstName = data[1]
+        object.lastName = data[2]
+        object.email = data[3]
+        object.gender = data[4]
+        object.ip = data[5]
+
+        parsed.push(object)
+    }
+
+    return parsed
+}
+
 class User {
     constructor(id, firstName, lastName, email, gender, ip) {
         this.id = id
@@ -47,6 +77,40 @@ class User {
 class UsersBDD {
     constructor(rawData) {
         this.raw = rawData
+        this._users = []
+    }
+
+    init() {
+        const self = this
+
+        return new Promise((success, error) => {
+            self._users = parseCSV(self.raw)
+            success()
+        }) 
+    }
+
+    get(id) { 
+        return this._users.find(user => user.id == id) || null
+    }
+
+    put(user) {
+        this._users.push(user)
+    }
+
+    getByEmail(email) {
+        return this._users.find(user => user.email == email) || null
+    }
+
+    getByIP(ip) {
+        return this._users.find(user => user.ip == ip) || null
+    }
+
+    getByFirstName(firstName) {
+        return this._users.filter(user => user.firstName == firstName)
+    }
+
+    get length() {
+        return this._users.length
     }
 }
 

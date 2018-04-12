@@ -6,7 +6,7 @@ Pour rappel, une suite de Fibonacci est définie par
 
 fib(n+1) = fib(n) + fib(n - 1)
 
-fib(0) == 1 et fib(1) == 1
+fib(0) == 0 et fib(1) == 1
 
 Par exemple :
 
@@ -15,8 +15,8 @@ fib(3) = fib(2) + fib(1)
 */
 /* TD Part */
 
-const fib = (n) => {
-}
+const fib = n =>  n < 2 ? n : fib(n - 1) + fib(n - 2)
+
 
 /* Testing Part */
 const terms = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
@@ -29,3 +29,5 @@ function test() {
 }
 
 console.log(test() === true ? 'TD00 :: Success' : 'TD00 :: Failed')
+
+module.exports = fib

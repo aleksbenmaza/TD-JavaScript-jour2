@@ -17,7 +17,19 @@ p1.add(p2) // Retourne un nouveau point ayant pour coordonées x : 4 + 3, y : 2 
 */
 /* TD Part */
 
-class Point3 {
+Point2 = require('./td05.js')
+
+class Point3 extends Point2 {
+
+	constructor(x, y, z) {
+		super(x, y)
+		this.z = z
+	}
+
+	add(that) { 
+		const that2 = super.add(that)
+		return new Point3(that2.x, that2.y, this.z + that.z)
+	}
 }
 
 /* Testing Part */

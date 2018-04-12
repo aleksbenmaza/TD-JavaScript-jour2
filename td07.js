@@ -23,6 +23,41 @@ De plus vous devrez ajouter un attribut sum retournant la somme des coordonées 
 
 class Point {    
     constructor(x, y, z=null) { // Vous pouvez modifier ce prototype TANT que les tests passent
+        const coordinates = {
+            x: x,
+            y: y,
+            z: z
+        }
+
+        this._coordinates = coordinates
+    }
+
+    get x() {
+        return this._coordinates.x
+    }
+
+    set x(x) {
+        this._coordinates.x = x
+    }
+
+    get y() {
+        return this._coordinates.y
+    }
+
+    set y(y) {
+        this._coordinates.y = y
+    }
+
+    get z() {
+        return this._coordinates.z
+    }
+
+    set z(z) {
+        this._coordinates.z = z
+    }
+
+    get sum() {
+        return this.x + this.y + this.z
     }
 }
 

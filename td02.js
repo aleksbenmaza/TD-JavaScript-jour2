@@ -14,6 +14,22 @@ Enfin, il doit comporter un attribut length, retournant le nombre d'éléments c
 */
 
 let Storage = () => {
+    return {
+        _entries: {},
+        length: 0,
+        fetch(key) { 
+            if(key instanceof Object)
+                throw new Error
+            return this._entries[key]
+        },
+        put(key, value) { 
+            if(key instanceof Object)
+                throw new Error
+            if(typeof this._entries[key] === 'undefined')
+                ++this.length
+            this._entries[key] = value
+        }
+    }
 }
 
 /* Testing Part */

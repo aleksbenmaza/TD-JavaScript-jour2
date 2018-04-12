@@ -23,6 +23,28 @@ s.size // 1
 */
 
 let Storage = () => {
+    return {
+        _entries: [],
+        size: 0,
+        get(key) { 
+            for(var entry of this._entries)
+                if(entry.key == key)
+                    return entry.value
+            return null
+        },
+        set(key, value) { 
+            for(var entry of this._entries)
+                if(entry.key == key) {
+                    entry.value = value
+                    return;
+                }
+            this._entries.push({
+                key: key,
+                value: value
+            })
+            ++this.size
+        }
+    }
 }
 
 /* Testing Part */
